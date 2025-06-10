@@ -5,11 +5,9 @@ from sklearn.metrics import confusion_matrix
 
 from ex1 import hog 
 
-num_train = 100
-num_val = 500
-TRAIN = False
-
-
+num_train = 800
+num_val = 120
+TRAIN = True
 
 # Prepare training data
 HOG_train = np.zeros((2 * num_train, 3781), dtype=np.float32)
@@ -32,7 +30,7 @@ train_data = HOG_train[:, 1:]
 import joblib
 if TRAIN:
     # Train SVM
-    clf = svm.SVC(kernel='linear', C=1.0)
+    clf = svm.SVC(kernel='linear', C=0.1)
     clf.fit(train_data, train_labels)
     # Save
     joblib.dump(clf, 'svm_hog_model.joblib')
@@ -79,4 +77,4 @@ Increasing training sample size
 Augmenting data (flips, rotations)
 
 Using cross-validation splits for more robust validation
-''''
+'''
